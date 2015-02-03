@@ -102,7 +102,8 @@ new_average_steps <- ddply(activity, .(day, interval), summarise,
 series_plot2 <- ggplot( new_average_steps, aes(x=interval, y=mean_steps)) + 
                   geom_line(colour = "blue") +    
                   #theme(panel.background = element_rect(fill = 'white', colour = 'black'))+
-                  facet_grid(day ~ .) +
+                  #facet_grid(day ~ .) +
+                  facet_wrap(~ day, ncol=1)
                   theme_bw() +
                   theme(
                     #panel.border = element_blank(), 
