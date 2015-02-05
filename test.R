@@ -103,18 +103,16 @@ series_plot2 <- ggplot( new_average_steps, aes(x=interval, y=mean_steps)) +
                   geom_line(colour = "blue") +    
                   #theme(panel.background = element_rect(fill = 'white', colour = 'black'))+
                   #facet_grid(day ~ .) +
-                  facet_wrap(~ day, ncol=1)
+                  facet_wrap(~ day, ncol=1) +
                   theme_bw() +
                   theme(
                     #panel.border = element_blank(), 
                     panel.grid.major = element_blank(), 
                     panel.grid.minor = element_blank(), 
-                    axis.line = element_line(colour = "black")
-                    )+
-                                     
-                  xlab("Time interval") +
-                  ylab("Average steps") +
-                  ggtitle("Average steps by time interval of a day")
+                    axis.line = element_line(colour = "black")) +                                     
+                  xlab("Interval") +
+                  ylab("Number of steps")
+
 series_plot2
 
 
