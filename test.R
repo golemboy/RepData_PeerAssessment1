@@ -46,13 +46,13 @@ series_plot <- ggplot( average_steps, aes(x=interval, y=mean_steps)) +
                 ggtitle("Average steps by time interval of a day")
 series_plot
 
-## the total number of missing values in the dataset
-nrow(activity[is.na(activity$steps),])
 
-## calcuate the mean steps for each interval (include NA)
+## the total number of missing values in the dataset
+max_na <- nrow(activity[is.na(activity$steps),])
+
+## calcuate the mean steps for each interval
 mean_interval_steps <- ddply(activity, .(interval), summarise, 
                     mean_steps = mean(steps, na.rm = TRUE))
-
 
 ## merge activity and interval mean steps
 m <- join(x = activity, y = mean_interval_steps, by = "interval")
@@ -74,8 +74,10 @@ df2 <- data.frame(ve2)
 
 ## histogram of the total number of steps taken each day
 histo2 <- ggplot(dailysteps2, aes(x= total_steps)) +
-  geom_histogram(fill="lightblue", colour="black", binwidth=1000) +  
-  geom_vline(data=df2, aes(xintercept=ve2), colour=factor(ve2), linetype="dashed", size=1, show_guide = TRUE)+
+  geom_histogram(fill="lightblue", colour="black", binwidth=2000) +  
+  #geom_vline(data=df2, aes(xintercept=ve2), colour=factor(ve2), linetype="dashed", size=1, show_guide = TRUE)+  
+  geom_vline(aes(xintercept = mean_step2), color="red", linetype="dashed", size=1) +          
+  geom_vline(aes(xintercept = median_step2), color="blue", linetype="dashed", size=1) +
   xlab("Total Number of steps") +
   ggtitle("The total number of steps taken each day")
 histo2

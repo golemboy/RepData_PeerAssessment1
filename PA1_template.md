@@ -1,4 +1,9 @@
-# Reproducible Research: Peer Assessment 1
+---
+title: "Reproducible Research: Peer Assessment 1"
+output: 
+  html_document:
+    keep_md: true
+---
 
 
 ## Loading and preprocessing the data
@@ -24,7 +29,7 @@ dailysteps <- ddply(activity, .(date), summarise,
 
 
 
-![](figure/histogram-1.png) 
+![plot of chunk histogram](figure/histogram-1.png) 
 
 ## Mean and median of the total number of steps taken per day
 
@@ -44,7 +49,7 @@ average_steps <- ddply(activity, .(interval), summarise,
 
 
 
-![](figure/time_series_plot-1.png) 
+![plot of chunk time_series_plot](figure/time_series_plot-1.png) 
 
 ### Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
 
@@ -80,7 +85,7 @@ m[is.na(m$steps),]$steps = m[is.na(m$steps),]$mean_steps
 activity2 <- m[, c(1:3)]
 ```
 
-![](figure/histogramm2-1.png) 
+![plot of chunk histogramm2](figure/histogramm2-1.png) 
 
 ### Mean and median
 
@@ -113,4 +118,4 @@ activity <- activity[, c(1:4)]
 
 
 ### Plot in a time series
-![](figure/unnamed-chunk-13-1.png) 
+![plot of chunk time_series_plot2](figure/time_series_plot2-1.png) 

@@ -164,7 +164,7 @@ activity <- activity[, c(1:4)]
 
 
 ### Plot in a time series
-```{r echo=FALSE}
+```{r time_series_plot2, echo=FALSE}
 ## average number of steps by interval
 new_average_steps <- ddply(activity, .(day, interval), summarise, 
                        mean_steps = mean(steps, na.rm = TRUE))
