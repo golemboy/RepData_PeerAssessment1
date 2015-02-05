@@ -4,7 +4,9 @@ output:
   html_document:
     keep_md: true
 ---
-
+# Reproducible Research: Peer Assessment 1
+========================================
+  
 
 ## Loading and preprocessing the data
 
@@ -28,6 +30,27 @@ dailysteps <- ddply(activity, .(date), summarise,
 ```
 
 
+```r
+## mean and median
+mean_step = round(mean(dailysteps$total_steps))
+median_step = median(dailysteps$total_steps)
+
+## make a vector and a frame for the mean and the median line
+ve <- c(mean_step, median_step)
+df <- data.frame(ve)
+```
+
+
+```r
+## histogram of the total number of steps taken each day
+histo <- ggplot(dailysteps, aes(x= total_steps)) +
+          geom_histogram(fill="lightblue", colour="black", binwidth=2000) +
+          geom_vline(data=df, aes(xintercept=ve), colour=factor(ve),
+                     linetype="dashed", size=1, show_guide = TRUE)+
+          xlab("Total Number of steps") +
+          ggtitle("The total number of steps taken each day")
+histo
+```
 
 ![plot of chunk histogram](figure/histogram-1.png) 
 
@@ -36,19 +59,6 @@ dailysteps <- ddply(activity, .(date), summarise,
 ```r
 mean_step = round(mean(dailysteps$total_steps))
 median_step = median(dailysteps$total_steps)
-median_step
-```
-
-```
-## [1] 10395
-```
-
-```r
-mean_step
-```
-
-```
-## [1] 9354
 ```
 the **mean** (red line on histogram) is **9 354** and the **median** (green line on histogram) is **10 395**. 
 
@@ -61,6 +71,23 @@ average_steps <- ddply(activity, .(interval), summarise,
 ```
 
 
+```r
+## the maximum number of steps
+max_steps = max(average_steps$mean_steps)
+cross_interval = average_steps[average_steps$mean_steps == max_steps,]$interval
+```
+
+
+```r
+## Time series plot
+series_plot <- ggplot( average_steps, aes(x=interval, y=mean_steps)) + 
+                geom_line(colour = "red") +                                
+                geom_vline(xintercept = cross_interval, colour="blue", linetype = "longdash") + 
+                xlab("Time interval") +
+                ylab("Average steps")+
+                ggtitle("Average steps by time interval of a day")
+series_plot
+```
 
 ![plot of chunk time_series_plot](figure/time_series_plot-1.png) 
 
@@ -70,7 +97,7 @@ average_steps <- ddply(activity, .(interval), summarise,
 ```r
 ## the maximum number of steps
 max_steps = max(average_steps$mean_steps)
-# the average cross interval
+## the average cross interval
 cross_interval = average_steps[average_steps$mean_steps == max_steps,]$interval
 ```
 the average across interval (the blue line on the time series plot) is **835** for **206** maximum number of steps
@@ -87,7 +114,7 @@ there is **2304**  missing values in the data set.
 
 
 ```r
-## calcuate the mean steps for each interval
+## calculate the mean steps for each interval
 mean_interval_steps <- ddply(activity, .(interval), summarise, 
                     mean_steps = mean(steps, na.rm = TRUE))
 
@@ -96,6 +123,29 @@ m <- join(x = activity, y = mean_interval_steps, by = "interval")
 m[is.na(m$steps),]$steps = m[is.na(m$steps),]$mean_steps
 
 activity2 <- m[, c(1:3)]
+```
+
+
+```r
+## total number of steps taken by day
+dailysteps2 <- ddply(activity2, .(date), summarise, 
+                    total_steps = sum(steps))
+
+## Mean and median of the total number of steps taken per day
+mean_step2 = round(mean(dailysteps2$total_steps))
+median_step2 = round(median(dailysteps2$total_steps))
+
+ve2 <- c(mean_step2, median_step2)
+df2 <- data.frame(ve2)
+
+## histogram of the total number of steps taken each day
+histo2 <- ggplot(dailysteps2, aes(x= total_steps)) +
+  geom_histogram(fill="lightblue", colour="black", binwidth=2000) +  
+  geom_vline(aes(xintercept = mean_step2), color="red", linetype="dashed", size=1) +          
+  geom_vline(aes(xintercept = median_step2), color="blue", linetype="dashed", size=1) +
+  xlab("Total Number of steps") +
+  ggtitle("The total number of steps taken each day")
+histo2
 ```
 
 ![plot of chunk histogramm2](figure/histogramm2-1.png) 
@@ -131,4 +181,25 @@ activity <- activity[, c(1:4)]
 
 
 ### Plot in a time series
+
+```r
+## average number of steps by interval
+new_average_steps <- ddply(activity, .(day, interval), summarise, 
+                       mean_steps = mean(steps, na.rm = TRUE))
+
+## Time series plot
+series_plot2 <- ggplot( new_average_steps, aes(x=interval, y=mean_steps)) + 
+                  geom_line(colour = "deepskyblue") +    
+                  facet_wrap(~ day, ncol=1) +
+                  theme_bw() +
+                  theme(                  
+                    panel.grid.major = element_blank(), 
+                    panel.grid.minor = element_blank(), 
+                    axis.line = element_line(colour = "black")) +                                     
+                  xlab("Interval") +
+                  ylab("Number of steps")
+
+series_plot2
+```
+
 ![plot of chunk time_series_plot2](figure/time_series_plot2-1.png) 
