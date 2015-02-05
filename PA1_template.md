@@ -36,6 +36,19 @@ dailysteps <- ddply(activity, .(date), summarise,
 ```r
 mean_step = round(mean(dailysteps$total_steps))
 median_step = median(dailysteps$total_steps)
+median_step
+```
+
+```
+## [1] 10395
+```
+
+```r
+mean_step
+```
+
+```
+## [1] 9354
 ```
 the **mean** (red line on histogram) is **9 354** and the **median** (green line on histogram) is **10 395**. 
 

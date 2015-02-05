@@ -225,6 +225,16 @@ dailysteps &lt;- ddply(activity, .(date), summarise,
 
 <pre><code class="r">mean_step = round(mean(dailysteps$total_steps))
 median_step = median(dailysteps$total_steps)
+median_step
+</code></pre>
+
+<pre><code>## [1] 10395
+</code></pre>
+
+<pre><code class="r">mean_step
+</code></pre>
+
+<pre><code>## [1] 9354
 </code></pre>
 
 <p>the <strong>mean</strong> (red line on histogram) is <strong>9 354</strong> and the <strong>median</strong> (green line on histogram) is <strong>10 395</strong>. </p>

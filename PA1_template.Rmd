@@ -48,9 +48,11 @@ histo
 ````
 
 ## Mean and median of the total number of steps taken per day
-```{r cache=TRUE}
+```{r}
 mean_step = round(mean(dailysteps$total_steps))
 median_step = median(dailysteps$total_steps)
+median_step
+mean_step
 ```
 the **mean** (red line on histogram) is **`r format(mean_step, big.mark=" ")`** and the **median** (green line on histogram) is **`r format(median_step, big.mark=" ")`**. 
 
