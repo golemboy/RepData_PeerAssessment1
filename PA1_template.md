@@ -52,7 +52,20 @@ histo
 
 ```r
 mean_step = round(mean(dailysteps$total_steps))
+mean_step
+```
+
+```
+## [1] 9354
+```
+
+```r
 median_step = median(dailysteps$total_steps)
+median_step
+```
+
+```
+## [1] 10395
 ```
 the **mean** (red line on histogram) is **9 354** and the **median** (green line on histogram) is **10 395**. 
 
@@ -91,8 +104,21 @@ series_plot
 ```r
 ## the maximum number of steps
 max_steps = max(average_steps$mean_steps)
+max_steps
+```
+
+```
+## [1] 206.1698
+```
+
+```r
 ## the average cross interval
 cross_interval = average_steps[average_steps$mean_steps == max_steps,]$interval
+cross_interval
+```
+
+```
+## [1] 835
 ```
 the average across interval (the blue line on the time series plot) is **835** for **206** maximum number of steps
 
@@ -101,6 +127,11 @@ the average across interval (the blue line on the time series plot) is **835** f
 ```r
 ## the total number of missing values in the dataset
 total_na <- nrow(activity[is.na(activity$steps),])
+total_na
+```
+
+```
+## [1] 2304
 ```
 there is **2304**  missing values in the data set.
 
@@ -149,7 +180,20 @@ histo2
 ```r
 ## Mean and median of the total number of steps taken per day
 mean_step2 = round(mean(dailysteps2$total_steps))
+mean_step2
+```
+
+```
+## [1] 10766
+```
+
+```r
 median_step2 = round(median(dailysteps2$total_steps))
+median_step2
+```
+
+```
+## [1] 10766
 ```
 the **mean** `10 766` and the **median**  `10 766` differs from the first estimated without empty values, they have the same value because of the filling of the NA values 
 
